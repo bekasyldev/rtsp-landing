@@ -143,7 +143,9 @@
     "submitIdle": "Submit Request",
     "submitSending": "Sending…",
     "successMsg": "Request submitted. We will contact you and advise on how to connect your camera.",
-    "errorMsg": "Please enter a phone number — we will call you back."
+    "errorMsg": "Please enter a phone number — we will call you back.",
+    "errorMsgEmail": "Please enter a valid email address.",
+    "errorMsgApi": "Failed to send. Please try again or contact us directly."
   },
   "footer": {
     "note": "Web link to camera for online video surveillance of production facilities.",
