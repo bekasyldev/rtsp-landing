@@ -1,7 +1,15 @@
 {
   "meta": {
     "title": "Protector AI Stream — Web Camera Link",
-    "description": "Connect your RTSP camera and get a public link for the inspector. Cloud video surveillance for industrial facilities."
+    "description": "Connect your RTSP camera and get a public link for the inspector. Cloud video surveillance for industrial facilities.",
+    "keywords": [
+      "RTSP camera in browser",
+      "web camera link",
+      "online production surveillance",
+      "RTSP to HLS",
+      "Low-Latency HLS",
+      "WireGuard camera"
+    ]
   },
   "nav": {
     "demo": "Demo Stream",
