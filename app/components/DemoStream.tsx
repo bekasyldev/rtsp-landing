@@ -8,7 +8,6 @@ import {
   Play,
   ArrowClockwise,
   WarningCircle,
-  LockSimple,
 } from "@phosphor-icons/react";
 import type { Dictionary } from "../[lang]/dictionaries";
 
@@ -16,7 +15,7 @@ type DemoDict = Dictionary["demo"];
 
 type StreamState = "loading" | "starting" | "live" | "offline" | "error";
 
-const HLS_SRC = "https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8";
+const HLS_SRC = "https://stream.rtsp.kz/push_a1b2c3d4e5/index.m3u8";
 
 export default function DemoStream({ dict }: { dict: DemoDict }) {
   const videoRef = useRef<HTMLVideoElement>(null);
@@ -24,14 +23,6 @@ export default function DemoStream({ dict }: { dict: DemoDict }) {
   const [state, setState] = useState<StreamState>("loading");
   const [version, setVersion] = useState(0);
   const [needsPlay, setNeedsPlay] = useState(false);
-
-  const stateRows: { id: StreamState; label: string; desc: string }[] = [
-    { id: "loading",  label: "loading",         desc: dict.stateDescLoading },
-    { id: "starting", label: "stream starting", desc: dict.stateDescStarting },
-    { id: "live",     label: "live",            desc: dict.stateDescLive },
-    { id: "offline",  label: "offline",         desc: dict.stateDescOffline },
-    { id: "error",    label: "playback error",  desc: dict.stateDescError },
-  ];
 
   useEffect(() => {
     let cancelled = false;
@@ -108,7 +99,6 @@ export default function DemoStream({ dict }: { dict: DemoDict }) {
       <p className="sub">{dict.sub}</p>
 
       <div className="demo-grid">
-        {/* Player */}
         <div className="demo-player">
           <video
             ref={videoRef}
@@ -197,31 +187,6 @@ export default function DemoStream({ dict }: { dict: DemoDict }) {
           )}
         </div>
 
-        {/* Side panel */}
-        <div className="demo-side">
-          <h3>{dict.sideTitle}</h3>
-          <p>{dict.sideBody}</p>
-
-          <div className="demo-states">
-            {stateRows.map((row) => (
-              <div key={row.id} className={`row ${state === row.id ? "active" : ""}`}>
-                <span className="label">{row.label}</span>
-                <span className="desc">{row.desc}</span>
-              </div>
-            ))}
-          </div>
-
-          <div className="demo-url">
-            <LockSimple weight="fill" size={14} />
-            <span>
-              <span className="scheme">https://</span>
-              stream.protectorai.kz/
-              <span className="slug">demo</span>/
-              <span className="slug">camera-01</span>
-              /live
-            </span>
-          </div>
-        </div>
       </div>
     </section>
   );

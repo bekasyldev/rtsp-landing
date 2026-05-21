@@ -38,8 +38,8 @@ export default function Hero({ dict }: { dict: HeroDict }) {
                     fontSize: 13,
                     padding: "1px 6px",
                     borderRadius: 4,
-                    background: "rgba(44,144,234,0.10)",
-                    color: "var(--brand-blue)",
+                    background: "rgba(83,88,98,0.10)",
+                    color: "#535862",
                   }}
                 >
                   /&#123;companySlug&#125;/&#123;cameraSlug&#125;/live
@@ -84,10 +84,7 @@ export default function Hero({ dict }: { dict: HeroDict }) {
               <div className="url">
                 <Lock weight="fill" size={12} style={{ color: "#287219" }} />
                 <span className="scheme">https://</span>
-                stream.protectorai.kz/
-                <span className="slug">zhasyl-dala</span>/
-                <span className="slug">cex-1</span>
-                <span className="path">/live</span>
+                ktp.protectorai.kz/shabitex/cex-1/live
               </div>
             </div>
 

@@ -5,8 +5,6 @@ import {
   PaperPlaneTilt,
   Phone,
   EnvelopeSimple,
-  TelegramLogo,
-  Buildings,
   CheckCircle,
   WarningCircle,
 } from "@phosphor-icons/react";
@@ -16,13 +14,10 @@ type ContactDict = Dictionary["contact"];
 
 type FormState = "idle" | "submitting" | "success" | "error_phone" | "error_email" | "error_api";
 
-// Extract only the 10 local digits from whatever the user typed/pasted.
-// Strips +7/+8 prefix first so the country code never ends up in the local part.
 function extractLocal(raw: string): string {
   let s = raw.trim();
   if (s.startsWith("+7") || s.startsWith("+8")) s = s.slice(2);
   const digits = s.replace(/\D/g, "");
-  // Pasted full number without "+": 77473336952 → strip leading 7/8
   if (digits.length > 10 && (digits.startsWith("7") || digits.startsWith("8"))) {
     return digits.slice(1, 11);
   }
@@ -109,14 +104,6 @@ export default function Contact({ dict }: { dict: ContactDict }) {
             <span className="channel">
               <EnvelopeSimple size={18} />
               info@protectorai.kz
-            </span>
-            <span className="channel">
-              <TelegramLogo size={18} />
-              @protectorai_kz
-            </span>
-            <span className="channel">
-              <Buildings size={18} />
-              Алматы, пр. Аль-Фараби, 17
             </span>
           </div>
         </div>

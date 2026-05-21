@@ -33,7 +33,7 @@ export default function ProblemSolution({ dict }: { dict: PSDict }) {
           <div className="visual">
             <span>
               <span className="ok">✓</span>{"  "}
-              https://stream.protectorai.kz/zhasyl-dala/cex-1/live
+              https://ktp.protectorai.kz/shabitex/cex-1/live
             </span>
             <span style={{ color: "var(--text-3)" }}>
               ↳ <span className="ok">{dict.solutionVisualOk}</span>

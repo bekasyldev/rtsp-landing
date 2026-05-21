@@ -741,7 +741,7 @@ p {
 }
 
 .browser-bar .url .scheme { color: #287219; font-weight: 700; }
-.browser-bar .url .slug   { color: #2C90EA; font-weight: 700; }
+.browser-bar .url .slug   { color: #535862; font-weight: 400; }
 .browser-bar .url .path   { color: #535862; }
 
 .browser-content {
@@ -856,10 +856,13 @@ p {
    ========================================================================= */
 
 .demo-grid {
-  display: grid;
-  grid-template-columns: 1.5fr 1fr;
-  gap: 32px;
-  align-items: stretch;
+  display: flex;
+  justify-content: center;
+}
+
+.demo-grid .demo-player {
+  width: 100%;
+  max-width: 860px;
 }
 
 .demo-player {
@@ -1644,7 +1647,7 @@ p {
   /* Eyebrow badge: constrain width so its text wraps inside the column */
   .hero-eyebrow { max-width: 100%; }
 
-  .demo-grid  { grid-template-columns: 1fr; }
+
   .ps-grid    { grid-template-columns: 1fr; }
 
   .steps      { grid-template-columns: repeat(2, 1fr); }
