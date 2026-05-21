@@ -5,36 +5,33 @@ import {
   Lock,
   Buildings,
 } from "@phosphor-icons/react/dist/ssr";
+import type { Dictionary } from "../[lang]/dictionaries";
 
-export default function Hero() {
+type HeroDict = Dictionary["hero"];
+
+export default function Hero({ dict }: { dict: HeroDict }) {
   return (
     <header className="hero light">
       <div className="hero-inner">
         <div>
           <span className="hero-eyebrow">
             <span className="dot" />
-            Облачное видеонаблюдение производственных площадок
+            {dict.eyebrow}
           </span>
 
           <h1>
-            Веб-ссылка на камеру для проверки{" "}
-            <em>производства</em>
+            {dict.h1}{" "}
+            <em>{dict.h1em}</em>
           </h1>
 
-          <p className="lede">
-            Подключаем камеру или видеорегистратор и выдаем публичную ссылку,
-            которую инспектор открывает в браузере без установки программ.
-          </p>
+          <p className="lede">{dict.lede}</p>
 
-          <p className="trustline">
-            Подходит для онлайн-видеонаблюдения производственных площадок
-            и передачи ссылки проверяющим органам.
-          </p>
+          <p className="trustline">{dict.trustline}</p>
 
           <div className="hero-bullets">
             {[
               <>
-                Публичная ссылка вида{" "}
+                {dict.bulletLinkPrefix}{" "}
                 <code
                   style={{
                     fontFamily: "var(--font-data)",
@@ -48,9 +45,9 @@ export default function Hero() {
                   /&#123;companySlug&#125;/&#123;cameraSlug&#125;/live
                 </code>
               </>,
-              "Просмотр в браузере без RTSP-плееров",
-              "Низкая задержка через Low-Latency HLS",
-              "Подключение по белому IP или через WireGuard",
+              dict.bullet2,
+              dict.bullet3,
+              dict.bullet4,
             ].map((text, i) => (
               <div className="hero-bullet" key={i}>
                 <CheckCircle
@@ -66,11 +63,11 @@ export default function Hero() {
           <div className="hero-ctas">
             <a href="#contact" className="btn btn-primary">
               <PaperPlaneTilt weight="bold" size={16} />
-              Оставить заявку
+              {dict.ctaPrimary}
             </a>
             <a href="#demo" className="btn btn-ghost">
               <Play weight="bold" size={16} />
-              Смотреть пример
+              {dict.ctaGhost}
             </a>
           </div>
         </div>
@@ -132,7 +129,7 @@ export default function Hero() {
               padding: "0 8px",
             }}
           >
-            ↑ Это то, что увидит инспектор после перехода по ссылке
+            {dict.cardCaption}
           </div>
         </div>
       </div>

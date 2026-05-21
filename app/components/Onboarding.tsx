@@ -5,58 +5,59 @@ import {
   Globe,
   ShieldCheck,
 } from "@phosphor-icons/react/dist/ssr";
+import type { Dictionary } from "../[lang]/dictionaries";
 
-const STEPS = [
-  {
-    n: "1",
-    icon: <MagnifyingGlass size={22} />,
-    title: "Изучаем вашу сеть",
-    body: "Сначала выясняем, как устроена сеть на объекте: где находятся камеры или видеорегистратор, есть ли белый IP-адрес, кто обслуживает роутер и можно ли безопасно открыть доступ к видеопотокам.",
-  },
-  {
-    n: "2",
-    icon: <PlugsConnected size={22} />,
-    title: "Подключаем камеры подходящим способом",
-    body: "Если у вас есть белый адрес, настраиваем доступ и выводим камеры в интернет через защищённую веб-ссылку. Если белого адреса нет, устанавливаем наше устройство и поднимаем закрытый VPN-канал.",
-  },
-  {
-    n: "3",
-    icon: <Monitor size={22} />,
-    title: "Вы получаете ссылки в личном кабинете",
-    body: "После подключения в вашем личном кабинете появляются ссылки на подключенные камеры. Ссылку можно отправить инспектору: он откроет страницу с описанием объекта и видеоплеером.",
-  },
-];
+type OnboardingDict = Dictionary["onboarding"];
 
-const MODES = [
-  {
-    icon: <Globe size={18} />,
-    title: "Белый IP-адрес",
-    body: "Настраиваем доступ к камерам или NVR, проверяем RTSP-потоки и публикуем их как веб-ссылки.",
-  },
-  {
-    icon: <ShieldCheck size={18} />,
-    title: "Нет белого IP-адреса",
-    body: "Ставим наше устройство на объекте и подключаем его к платформе через закрытый VPN-канал.",
-  },
-  {
-    icon: <Monitor size={18} />,
-    title: "Личный кабинет",
-    body: "После настройки пользователь видит список камер, статусы, лимиты и публичные ссылки.",
-  },
-];
+export default function Onboarding({ dict }: { dict: OnboardingDict }) {
+  const steps = [
+    {
+      n: "1",
+      icon: <MagnifyingGlass size={22} />,
+      title: dict.step1Title,
+      body: dict.step1Body,
+    },
+    {
+      n: "2",
+      icon: <PlugsConnected size={22} />,
+      title: dict.step2Title,
+      body: dict.step2Body,
+    },
+    {
+      n: "3",
+      icon: <Monitor size={22} />,
+      title: dict.step3Title,
+      body: dict.step3Body,
+    },
+  ];
 
-export default function Onboarding() {
+  const modes = [
+    {
+      icon: <Globe size={18} />,
+      title: dict.mode1Title,
+      body: dict.mode1Body,
+    },
+    {
+      icon: <ShieldCheck size={18} />,
+      title: dict.mode2Title,
+      body: dict.mode2Body,
+    },
+    {
+      icon: <Monitor size={18} />,
+      title: dict.mode3Title,
+      body: dict.mode3Body,
+    },
+  ];
+
   return (
     <section className="section" id="how">
       <h2>
-        Подключение <span className="accent">под ключ</span>
+        {dict.h2} <span className="accent">{dict.h2accent}</span>
       </h2>
-      <p className="sub">
-        Мы берём настройку и подключение на себя. От вас — доступ к объекту.
-      </p>
+      <p className="sub">{dict.sub}</p>
 
       <div className="steps">
-        {STEPS.map((s) => (
+        {steps.map((s) => (
           <div className="step" key={s.n}>
             <div className="stepnum">
               <span className="n">{s.n}</span>
@@ -69,7 +70,7 @@ export default function Onboarding() {
       </div>
 
       <div className="conn-modes">
-        {MODES.map((m) => (
+        {modes.map((m) => (
           <div className="conn-mode" key={m.title}>
             <div className="h">
               <span className="ic">{m.icon}</span>

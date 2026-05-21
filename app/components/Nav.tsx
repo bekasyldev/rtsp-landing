@@ -4,8 +4,13 @@ import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { List, X } from "@phosphor-icons/react";
+import type { Dictionary } from "../[lang]/dictionaries";
 
-export default function Nav() {
+type NavDict = Dictionary["nav"];
+
+const LANG_LABELS: Record<string, string> = { ru: "RU", en: "EN", kk: "KK" };
+
+export default function Nav({ dict, lang }: { dict: NavDict; lang: string }) {
   const [open, setOpen] = useState(false);
 
   return (
@@ -20,23 +25,34 @@ export default function Nav() {
         </div>
 
         <nav className="nav-links">
-          <Link href="#demo">Пример трансляции</Link>
-          <Link href="#how">Как подключить</Link>
-          <Link href="#price">Тарифы</Link>
-          <Link href="#faq">FAQ</Link>
+          <Link href="#demo">{dict.demo}</Link>
+          <Link href="#how">{dict.how}</Link>
+          <Link href="#price">{dict.pricing}</Link>
+          <Link href="#faq">{dict.faq}</Link>
         </nav>
 
         <div className="nav-cta">
-          <button className="btn btn-ghost btn-sm">Войти</button>
+          <div className="lang-switcher">
+            {(["ru", "en", "kk"] as const).map((l) => (
+              <Link
+                key={l}
+                href={`/${l}`}
+                className={`lang-btn${lang === l ? " active" : ""}`}
+              >
+                {LANG_LABELS[l]}
+              </Link>
+            ))}
+          </div>
+          <button className="btn btn-ghost btn-sm">{dict.signIn}</button>
           <Link href="#contact" className="btn btn-sm btn-primary">
-            Оставить заявку
+            {dict.cta}
           </Link>
         </div>
 
         <button
           className="nav-hamburger"
           onClick={() => setOpen((o) => !o)}
-          aria-label="Меню"
+          aria-label={dict.menuLabel}
         >
           {open ? <X size={22} /> : <List size={22} />}
         </button>
@@ -44,14 +60,26 @@ export default function Nav() {
 
       {open && (
         <div className="nav-mobile-menu">
-          <Link href="#demo" onClick={() => setOpen(false)}>Пример трансляции</Link>
-          <Link href="#how" onClick={() => setOpen(false)}>Как подключить</Link>
-          <Link href="#price" onClick={() => setOpen(false)}>Тарифы</Link>
-          <Link href="#faq" onClick={() => setOpen(false)}>FAQ</Link>
+          <Link href="#demo" onClick={() => setOpen(false)}>{dict.demo}</Link>
+          <Link href="#how" onClick={() => setOpen(false)}>{dict.how}</Link>
+          <Link href="#price" onClick={() => setOpen(false)}>{dict.pricing}</Link>
+          <Link href="#faq" onClick={() => setOpen(false)}>{dict.faq}</Link>
           <div className="nav-mobile-ctas">
-            <button className="btn btn-ghost btn-sm">Войти</button>
+            <div className="lang-switcher">
+              {(["ru", "en", "kk"] as const).map((l) => (
+                <Link
+                  key={l}
+                  href={`/${l}`}
+                  className={`lang-btn${lang === l ? " active" : ""}`}
+                  onClick={() => setOpen(false)}
+                >
+                  {LANG_LABELS[l]}
+                </Link>
+              ))}
+            </div>
+            <button className="btn btn-ghost btn-sm">{dict.signIn}</button>
             <Link href="#contact" className="btn btn-sm btn-primary" onClick={() => setOpen(false)}>
-              Оставить заявку
+              {dict.cta}
             </Link>
           </div>
         </div>

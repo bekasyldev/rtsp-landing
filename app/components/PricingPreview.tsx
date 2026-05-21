@@ -1,29 +1,30 @@
 import { CheckCircle, PaperPlaneTilt } from "@phosphor-icons/react/dist/ssr";
+import type { Dictionary } from "../[lang]/dictionaries";
 
-const ITEMS = [
-  "Публичные ссылки для камер",
-  "До 5 одновременных зрителей на камеру",
-  "100 stream-hours в месяц на камеру",
-  "Личный кабинет со списком камер и статусами",
-  "Подключение по белому IP или через WireGuard",
-];
+type PricingDict = Dictionary["pricing"];
 
-export default function PricingPreview() {
+export default function PricingPreview({ dict }: { dict: PricingDict }) {
+  const items = [
+    dict.item1,
+    dict.item2,
+    dict.item3,
+    dict.item4,
+    dict.item5,
+  ];
+
   return (
     <section className="section" id="price">
       <h2>
-        Простой <span className="accent">тариф</span>
+        {dict.h2} <span className="accent">{dict.h2accent}</span>
       </h2>
-      <p className="sub">
-        Один пакет для MVP. Без сложного биллинга — позже добавим тарифы под объёмы.
-      </p>
+      <p className="sub">{dict.sub}</p>
 
       <div className="price-preview">
         <div className="tier">Basic</div>
-        <div className="scope">До 5 активных камер</div>
+        <div className="scope">{dict.scope}</div>
 
         <ul>
-          {ITEMS.map((item) => (
+          {items.map((item) => (
             <li key={item}>
               <CheckCircle weight="fill" size={18} />
               {item}
@@ -34,14 +35,14 @@ export default function PricingPreview() {
         <div className="btn-row">
           <a href="#contact" className="btn btn-white">
             <PaperPlaneTilt weight="bold" size={14} />
-            Оставить заявку
+            {dict.ctaPrimary}
           </a>
           <a
             href="#faq"
             className="btn btn-ghost"
             style={{ color: "#fff", borderColor: "rgba(255,255,255,0.18)" }}
           >
-            Подробнее о лимитах
+            {dict.ctaGhost}
           </a>
         </div>
       </div>

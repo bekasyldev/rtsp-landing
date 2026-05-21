@@ -10,10 +10,13 @@ import {
   CheckCircle,
   WarningCircle,
 } from "@phosphor-icons/react";
+import type { Dictionary } from "../[lang]/dictionaries";
+
+type ContactDict = Dictionary["contact"];
 
 type FormState = "idle" | "submitting" | "success" | "error";
 
-export default function Contact() {
+export default function Contact({ dict }: { dict: ContactDict }) {
   const [name, setName] = useState("");
   const [company, setCompany] = useState("");
   const [phone, setPhone] = useState("");
@@ -24,7 +27,6 @@ export default function Contact() {
     e.preventDefault();
     if (!phone.trim()) { setFormState("error"); return; }
     setFormState("submitting");
-    // Replace with real API call
     setTimeout(() => {
       setFormState("success");
     }, 800);
@@ -34,16 +36,13 @@ export default function Contact() {
     <section className="section" id="contact">
       <div className="contact">
         <div>
-          <h3>Оставьте заявку — мы поможем подключить камеру.</h3>
-          <p className="lede">
-            Расскажите про объект — подскажем способ подключения, проверим вашу
-            камеру и поможем оформить ссылку для инспектора.
-          </p>
+          <h3>{dict.h3}</h3>
+          <p className="lede">{dict.lede}</p>
 
           <div className="channels">
             <span className="channel">
               <Phone size={18} />
-              +7 708 596 89 38 · будни 9:00–19:00
+              {dict.channelPhone}
             </span>
             <span className="channel">
               <EnvelopeSimple size={18} />
@@ -64,14 +63,14 @@ export default function Contact() {
           <div className="row">
             <div className="field">
               <input
-                placeholder="Имя"
+                placeholder={dict.fieldName}
                 value={name}
                 onChange={(e) => setName(e.target.value)}
               />
             </div>
             <div className="field">
               <input
-                placeholder="Компания"
+                placeholder={dict.fieldCompany}
                 value={company}
                 onChange={(e) => setCompany(e.target.value)}
               />
@@ -80,7 +79,7 @@ export default function Contact() {
 
           <div className="field">
             <input
-              placeholder="Телефон ★"
+              placeholder={dict.fieldPhone}
               value={phone}
               onChange={(e) => {
                 setPhone(e.target.value);
@@ -93,7 +92,7 @@ export default function Contact() {
           <div className="field">
             <input
               type="email"
-              placeholder="Email"
+              placeholder={dict.fieldEmail}
               value={email}
               onChange={(e) => setEmail(e.target.value)}
             />
@@ -101,22 +100,20 @@ export default function Contact() {
 
           <button className="submit" type="submit" disabled={formState === "submitting"}>
             <PaperPlaneTilt weight="bold" size={14} />
-            {formState === "submitting" ? "Отправка…" : "Отправить заявку"}
+            {formState === "submitting" ? dict.submitSending : dict.submitIdle}
           </button>
 
           {formState === "success" && (
             <div className="state-pane success">
               <CheckCircle weight="fill" size={20} />
-              <span>
-                Заявка отправлена. Мы свяжемся с вами и подскажем, как подключить камеру.
-              </span>
+              <span>{dict.successMsg}</span>
             </div>
           )}
 
           {formState === "error" && (
             <div className="state-pane error">
               <WarningCircle weight="fill" size={20} />
-              <span>Укажите номер телефона — мы перезвоним.</span>
+              <span>{dict.errorMsg}</span>
             </div>
           )}
         </form>

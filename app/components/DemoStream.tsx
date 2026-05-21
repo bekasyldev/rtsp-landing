@@ -10,25 +10,28 @@ import {
   WarningCircle,
   LockSimple,
 } from "@phosphor-icons/react";
+import type { Dictionary } from "../[lang]/dictionaries";
+
+type DemoDict = Dictionary["demo"];
 
 type StreamState = "loading" | "starting" | "live" | "offline" | "error";
 
-const STATE_ROWS: { id: StreamState; label: string; desc: string }[] = [
-  { id: "loading",  label: "loading",         desc: "Загружаем плеер и манифест" },
-  { id: "starting", label: "stream starting", desc: "Получаем первые сегменты потока" },
-  { id: "live",     label: "live",            desc: "Поток воспроизводится в реальном времени" },
-  { id: "offline",  label: "offline",         desc: "Поток сейчас недоступен" },
-  { id: "error",    label: "playback error",  desc: "Браузер не смог воспроизвести поток" },
-];
-
 const HLS_SRC = "https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8";
 
-export default function DemoStream() {
+export default function DemoStream({ dict }: { dict: DemoDict }) {
   const videoRef = useRef<HTMLVideoElement>(null);
   const hlsRef = useRef<Hls | null>(null);
   const [state, setState] = useState<StreamState>("loading");
   const [version, setVersion] = useState(0);
   const [needsPlay, setNeedsPlay] = useState(false);
+
+  const stateRows: { id: StreamState; label: string; desc: string }[] = [
+    { id: "loading",  label: "loading",         desc: dict.stateDescLoading },
+    { id: "starting", label: "stream starting", desc: dict.stateDescStarting },
+    { id: "live",     label: "live",            desc: dict.stateDescLive },
+    { id: "offline",  label: "offline",         desc: dict.stateDescOffline },
+    { id: "error",    label: "playback error",  desc: dict.stateDescError },
+  ];
 
   useEffect(() => {
     let cancelled = false;
@@ -100,11 +103,9 @@ export default function DemoStream() {
   return (
     <section className="section" id="demo">
       <h2>
-        Пример онлайн-<span className="accent">трансляции</span>
+        {dict.h2}<span className="accent">{dict.h2accent}</span>
       </h2>
-      <p className="sub">
-        Нажмите play и проверьте, как выглядит ссылка, которую получает инспектор.
-      </p>
+      <p className="sub">{dict.sub}</p>
 
       <div className="demo-grid">
         {/* Player */}
@@ -117,14 +118,12 @@ export default function DemoStream() {
             preload="metadata"
           />
 
-          {/* Top-left label */}
           <div className="overlay-tl">
             <span style={{ opacity: 0.85, fontSize: 11 }}>
               DEMO · stream.protectorai.kz/demo
             </span>
           </div>
 
-          {/* Top-right badge */}
           <div className="overlay-tr">
             {state === "live"     && <span className="badge live"><span className="pulse" />LIVE</span>}
             {state === "loading"  && <span className="badge loading">LOADING</span>}
@@ -136,26 +135,23 @@ export default function DemoStream() {
           {state === "live" && (
             <>
               <div className="overlay-bl">1080p · LL-HLS</div>
-              <div className="overlay-br">~2 с задержка</div>
+              <div className="overlay-br">{dict.overlayDelay}</div>
             </>
           )}
 
-          {/* State overlays */}
           {state === "loading" && (
             <div className="state-center">
               <div className="spinner" />
-              <div className="ttl">Загрузка</div>
-              <div className="sub">Подключаемся к серверу потоковой передачи.</div>
+              <div className="ttl">{dict.stateLoadingTitle}</div>
+              <div className="sub">{dict.stateLoadingSub}</div>
             </div>
           )}
 
           {state === "starting" && needsPlay && (
             <div className="state-center">
               <PlayCircle weight="fill" size={44} />
-              <div className="ttl">Нажмите Play, чтобы запустить демо</div>
-              <div className="sub">
-                Браузер требует подтверждение перед воспроизведением видео.
-              </div>
+              <div className="ttl">{dict.statePlayTitle}</div>
+              <div className="sub">{dict.statePlaySub}</div>
               <button
                 onClick={() => {
                   const v = videoRef.current;
@@ -163,7 +159,7 @@ export default function DemoStream() {
                 }}
               >
                 <Play weight="fill" size={14} />
-                Воспроизвести
+                {dict.statePlayBtn}
               </button>
             </div>
           )}
@@ -171,21 +167,19 @@ export default function DemoStream() {
           {state === "starting" && !needsPlay && (
             <div className="state-center">
               <div className="spinner" />
-              <div className="ttl">Стартуем поток…</div>
-              <div className="sub">Получаем первые сегменты от камеры.</div>
+              <div className="ttl">{dict.stateStartingTitle}</div>
+              <div className="sub">{dict.stateStartingSub}</div>
             </div>
           )}
 
           {state === "offline" && (
             <div className="state-center">
               <VideoCameraSlash size={44} />
-              <div className="ttl">Поток сейчас недоступен</div>
-              <div className="sub">
-                Демо-камера временно отключена. Попробуйте обновить через минуту.
-              </div>
+              <div className="ttl">{dict.stateOfflineTitle}</div>
+              <div className="sub">{dict.stateOfflineSub}</div>
               <button onClick={retry}>
                 <ArrowClockwise weight="bold" size={14} />
-                Повторить
+                {dict.stateRetry}
               </button>
             </div>
           )}
@@ -193,14 +187,11 @@ export default function DemoStream() {
           {state === "error" && (
             <div className="state-center">
               <WarningCircle size={44} />
-              <div className="ttl">Ошибка воспроизведения</div>
-              <div className="sub">
-                Браузер не смог открыть поток. Это бывает на старых версиях Safari
-                или при блокировке сети.
-              </div>
+              <div className="ttl">{dict.stateErrorTitle}</div>
+              <div className="sub">{dict.stateErrorSub}</div>
               <button onClick={retry}>
                 <ArrowClockwise weight="bold" size={14} />
-                Повторить
+                {dict.stateRetry}
               </button>
             </div>
           )}
@@ -208,14 +199,11 @@ export default function DemoStream() {
 
         {/* Side panel */}
         <div className="demo-side">
-          <h3>Это тот же плеер, что увидит инспектор</h3>
-          <p>
-            Демо использует то же ядро Low-Latency HLS, что и public live page.
-            На лендинге мы проверяем playback, fallback и error states в вашем браузере.
-          </p>
+          <h3>{dict.sideTitle}</h3>
+          <p>{dict.sideBody}</p>
 
           <div className="demo-states">
-            {STATE_ROWS.map((row) => (
+            {stateRows.map((row) => (
               <div key={row.id} className={`row ${state === row.id ? "active" : ""}`}>
                 <span className="label">{row.label}</span>
                 <span className="desc">{row.desc}</span>
