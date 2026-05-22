@@ -8,6 +8,7 @@ import {
   Play,
   ArrowClockwise,
   WarningCircle,
+  Buildings,
 } from "@phosphor-icons/react";
 import type { Dictionary } from "../[lang]/dictionaries";
 
@@ -99,7 +100,18 @@ export default function DemoStream({ dict }: { dict: DemoDict }) {
       <p className="sub">{dict.sub}</p>
 
       <div className="demo-grid">
-        <div className="demo-player">
+        <div className="demo-player-wrap">
+          <div className="demo-obj-head">
+            <div className="demo-obj-ic">
+              <Buildings size={20} style={{ color: "var(--brand-blue)" }} />
+            </div>
+            <div>
+              <h5 className="demo-obj-name">ТОО «Жасыл Дала» · Цех №1 · Линия розлива</h5>
+              <div className="demo-obj-meta">г. Алматы · Камера активна с 14 мая 2026</div>
+            </div>
+          </div>
+
+          <div className="demo-player">
           <video
             ref={videoRef}
             playsInline
@@ -185,8 +197,10 @@ export default function DemoStream({ dict }: { dict: DemoDict }) {
               </button>
             </div>
           )}
-        </div>
+          </div>
 
+          <div className="demo-caption">{dict.cardCaption}</div>
+        </div>
       </div>
     </section>
   );

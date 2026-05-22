@@ -1,9 +1,6 @@
 import {
   PaperPlaneTilt,
-  Play,
   CheckCircle,
-  Lock,
-  Buildings,
 } from "@phosphor-icons/react/dist/ssr";
 import type { Dictionary } from "../[lang]/dictionaries";
 
@@ -65,70 +62,9 @@ export default function Hero({ dict }: { dict: HeroDict }) {
               <PaperPlaneTilt weight="bold" size={16} />
               {dict.ctaPrimary}
             </a>
-            <a href="#demo" className="btn btn-ghost">
-              <Play weight="bold" size={16} />
-              {dict.ctaGhost}
-            </a>
           </div>
         </div>
 
-        {/* Hero card — browser mock */}
-        <div className="hero-card">
-          <div className="browser-mock">
-            <div className="browser-bar">
-              <div className="dots">
-                <span />
-                <span />
-                <span />
-              </div>
-              <div className="url">
-                <Lock weight="fill" size={12} style={{ color: "#287219" }} />
-                <span className="scheme">https://</span>
-                ktp.protectorai.kz/shabitex/cex-1/live
-              </div>
-            </div>
-
-            <div className="browser-content">
-              <div className="obj-head">
-                <div className="ic">
-                  <Buildings size={20} style={{ color: "var(--brand-blue)" }} />
-                </div>
-                <div>
-                  <h5>ТОО «Жасыл Дала» · Цех №1 · Линия розлива</h5>
-                  <div className="meta">г. Алматы · Камера активна с 14 мая 2026</div>
-                </div>
-              </div>
-
-              <div className="player-tile">
-                <div
-                  className="feed"
-                  style={{
-                    position: "absolute",
-                    inset: 0,
-                    background:
-                      "linear-gradient(#3A4E66cc, #28384Acc)",
-                  }}
-                />
-                <span className="live-badge">
-                  <span className="pulse" />
-                  LIVE
-                </span>
-                <span className="qual">1080p · LL-HLS</span>
-              </div>
-            </div>
-          </div>
-
-          <div
-            style={{
-              fontSize: 12,
-              color: "var(--text-3)",
-              textAlign: "center",
-              padding: "0 8px",
-            }}
-          >
-            {dict.cardCaption}
-          </div>
-        </div>
       </div>
     </header>
   );

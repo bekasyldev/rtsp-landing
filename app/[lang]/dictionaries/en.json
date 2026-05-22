@@ -31,8 +31,7 @@
     "bullet3": "Low latency and 24/7 uptime",
     "bullet4": "Turnkey connection with IT support",
     "ctaPrimary": "Get Started",
-    "ctaGhost": "Watch Demo",
-    "cardCaption": "↑ This is what the inspector sees after opening the link"
+    "ctaGhost": "Watch Demo"
   },
   "demo": {
     "h2": "Live Stream ",
@@ -57,7 +56,8 @@
     "stateDescStarting": "Receiving first stream segments",
     "stateDescLive": "Stream is playing in real time",
     "stateDescOffline": "Stream is currently unavailable",
-    "stateDescError": "Browser failed to play the stream"
+    "stateDescError": "Browser failed to play the stream",
+    "cardCaption": "↑ This is what the inspector sees after opening the link"
   },
   "problemSolution": {
     "h2": "Why this is a",
