@@ -21,7 +21,6 @@ export default function PricingPreview({ dict }: { dict: PricingDict }) {
 
       <div className="price-preview">
         <div className="tier">Basic</div>
-        <div className="scope">{dict.scope}</div>
 
         <ul>
           {items.map((item) => (
