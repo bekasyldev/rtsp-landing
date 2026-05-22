@@ -19,6 +19,7 @@ export default function Hero({ dict }: { dict: HeroDict }) {
           <h1>
             {dict.h1}{" "}
             <em>{dict.h1em}</em>
+            {dict.h1tail && <>{" "}{dict.h1tail}</>}
           </h1>
 
           <p className="lede">{dict.lede}</p>

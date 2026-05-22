@@ -38,7 +38,7 @@ export default function Footer({ dict, nav }: { dict: FooterDict; nav: NavDict }
 
         <div className="col">
           <h5>{dict.contactCol}</h5>
-          <a href="tel:+77085968938">+7 708 596 89 38</a>
+          <a href="tel:+77064083488">+7 706 408 34 88</a>
           <a href="mailto:info@protectorai.kz">info@protectorai.kz</a>
         </div>
       </div>
