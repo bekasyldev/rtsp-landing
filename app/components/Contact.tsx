@@ -50,6 +50,59 @@ export default function Contact({ dict }: { dict: ContactDict }) {
     if (formState === "error_phone" && local.length >= 10) setFormState("idle");
   };
 
+  const handlePhoneKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key !== "Backspace") return;
+
+    const input = e.currentTarget;
+    const pos = input.selectionStart ?? 0;
+    const selEnd = input.selectionEnd ?? pos;
+
+    // Let default handle selections or cursor at start
+    if (pos !== selEnd || pos === 0) return;
+
+    const charBefore = phone[pos - 1];
+
+    // Only intercept when cursor is right after a formatting character
+    if (!charBefore || /[\d+]/.test(charBefore)) return;
+
+    e.preventDefault();
+
+    // Find the nearest digit to the left
+    let digitPos = pos - 1;
+    while (digitPos > 0 && /\D/.test(phone[digitPos])) digitPos--;
+
+    // Don't touch the "+7 (" prefix (local digits start at index 4)
+    if (digitPos < 4) return;
+
+    // How many local digits appear before the one we're deleting
+    const localDigitsBefore = phone.slice(4, digitPos).replace(/\D/g, "").length;
+
+    const newLocal = extractLocal(phone.slice(0, digitPos) + phone.slice(digitPos + 1));
+    const newFormatted = formatPhone(newLocal);
+    setPhone(newFormatted);
+    if (formState === "error_phone" && newLocal.length >= 10) setFormState("idle");
+
+    // Restore cursor to the equivalent position in the new formatted string
+    requestAnimationFrame(() => {
+      if (!input.isConnected) return;
+      if (localDigitsBefore === 0) {
+        input.setSelectionRange(4, 4);
+        return;
+      }
+      let count = 0;
+      for (let i = 4; i < newFormatted.length; i++) {
+        if (/\d/.test(newFormatted[i])) {
+          count++;
+          if (count === localDigitsBefore) {
+            input.setSelectionRange(i + 1, i + 1);
+            return;
+          }
+        }
+      }
+      input.setSelectionRange(newFormatted.length, newFormatted.length);
+    });
+  };
+
   const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setEmail(e.target.value);
     if (formState === "error_email") setFormState("idle");
@@ -133,6 +186,7 @@ export default function Contact({ dict }: { dict: ContactDict }) {
               placeholder="+7 (___) ___-__-__"
               value={phone}
               onChange={handlePhoneChange}
+              onKeyDown={handlePhoneKeyDown}
             />
           </div>
 

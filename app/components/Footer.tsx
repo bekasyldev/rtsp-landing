@@ -40,9 +40,6 @@ export default function Footer({ dict, nav }: { dict: FooterDict; nav: NavDict }
           <h5>{dict.contactCol}</h5>
           <a href="tel:+77085968938">+7 708 596 89 38</a>
           <a href="mailto:info@protectorai.kz">info@protectorai.kz</a>
-          <a href="https://t.me/protectorai_kz" target="_blank" rel="noreferrer">
-            {dict.telegram}
-          </a>
         </div>
       </div>
 
