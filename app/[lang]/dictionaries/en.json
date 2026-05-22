@@ -70,7 +70,7 @@
     "problemVisualErr": "browser: «Failed to open link»",
     "solutionTag": "Solution",
     "solutionH3": "We turn the camera stream into a web link",
-    "solutionP": "We set up the connection and our service takes the RTSP stream from the required camera",
+    "solutionP": "The service takes the RTSP stream, prepares it for the browser, and provides a public page with the facility description and a video player. We set up the connection and our service takes the RTSP stream from the required camera",
     "solutionVisualOk": "browser: player + facility description"
   },
   "onboarding": {

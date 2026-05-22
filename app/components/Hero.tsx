@@ -30,18 +30,6 @@ export default function Hero({ dict }: { dict: HeroDict }) {
             {[
               <>
                 {dict.bulletLinkPrefix}{" "}
-                <code
-                  style={{
-                    fontFamily: "var(--font-data)",
-                    fontSize: 13,
-                    padding: "1px 6px",
-                    borderRadius: 4,
-                    background: "rgba(83,88,98,0.10)",
-                    color: "#535862",
-                  }}
-                >
-                  /&#123;companySlug&#125;/&#123;cameraSlug&#125;/live
-                </code>
               </>,
               dict.bullet2,
               dict.bullet3,
